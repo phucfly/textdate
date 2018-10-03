@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    .input-date, .input-month{
+        width: 25px;
+    }
+    .input-year{
+        width: 50px;
+    }
+    .text-date{
+        border: none;
+        border-bottom: 1px dashed #aaa;
+        outline: none;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <input type="text" class="date" id="input">
+    <input type="text" class="date-format" id="id-format">
+    <div id="result"></div>
+    <button onclick="show()">OK</button>
+
+
+    <div style="border: 1px solid #aaa; padding: 20px;" id="content">
+        <input type="text" id="convert-input">
+        <button onclick="convert()">Convert to input date</button>
+    </div>
+    <script src="app.js"></script>
+    <script>
+        $('input.date').toTextDate();
+        $('input.date-format').toTextDate({
+            classInputDate: 'input-date',
+            classInputMonth: 'input-date',
+            classInputYear: 'input-year',
+            symbol: '-'
+        });
+        function show(){
+            $('#result').html(`
+                result: `+ $('#input').val() +`<br>
+                result: `+ $('#id-format').val() +`<br>
+            `);
+        };
+
+        status = 0;
+        oldStatusHtml = $('#content').html();
+        function convert(){
+            if(status==0){ $('#convert-input').toTextDate(); status = 1;}
+            else{ $('#content').html(oldStatusHtml); status=0; }
+        }
+    </script>
+</body>
+</html>
